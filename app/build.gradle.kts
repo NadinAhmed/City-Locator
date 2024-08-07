@@ -82,5 +82,6 @@ dependencies{
 //Dagger Hilt & Kotlin Kapt Dependencies
 dependencies{
     implementation(libs.hilt.android)
+    implementation (libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.android.compiler)
 }

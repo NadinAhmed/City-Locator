@@ -1,6 +1,5 @@
 package com.nadin.city_locator.presentation.theme
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -17,22 +16,29 @@ val OpenSansFontFamily = FontFamily(
 )
 
 val Typography = Typography(
-    //title text
     titleLarge = TextStyle(
-        fontSize = 14.sp,
+        fontSize = 20.sp,
+        lineHeight = 24.sp,
+        fontFamily = OpenSansFontFamily,
+        fontWeight = FontWeight.W400,
+        color = Color(0xFF1D1B20),
+    ),
+
+    //title text
+    titleMedium = TextStyle(
+        fontSize = 16.sp,
         lineHeight = 16.8.sp,
         fontFamily = OpenSansFontFamily,
         fontWeight = FontWeight.W700,
-        color = Color.Black,
+        color = Primary,
     ),
 
     //subtitle text
     titleSmall = TextStyle(
-        fontSize = 14.sp,
+        fontSize = 12.sp,
         lineHeight = 16.8.sp,
         fontFamily = OpenSansFontFamily,
-        fontWeight = FontWeight.W400,
-        color = Neutrals900,
+        color = OnPrimary,
     ),
 
     //text on button
@@ -50,7 +56,7 @@ val Typography = Typography(
         lineHeight = 24.sp,
         fontFamily = OpenSansFontFamily,
         fontWeight = FontWeight.W400,
-        color = Neutrals900,
+        color = OnPrimary,
         letterSpacing = 0.5.sp,
     ),
 )

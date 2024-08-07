@@ -10,7 +10,7 @@ data class CityDto(
     val name: String,
     val country: String,
     @SerializedName("coord")
-    val coordinates: List<Coordinates>,
+    val coordinates: Coordinates,
 ) {
     fun toDomainModel() = City(
         id = id,
@@ -25,4 +25,5 @@ data class CityDto(
         country = city.country,
         coordinates = city.coordinates,
     )
+
 }

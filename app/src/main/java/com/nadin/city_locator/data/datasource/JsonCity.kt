@@ -3,9 +3,11 @@ package com.nadin.city_locator.data.datasource
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.nadin.city_locator.data.datasource.dto.CityDto
 import com.nadin.city_locator.domain.model.City
+import javax.inject.Inject
 
-class JsonCity(private val context: Context, private val fileName: String) {
+class JsonCity @Inject constructor(private val context: Context, private val fileName: String) {
 
     /**
      * Reads a JSON file from the assets folder and returns its content as a string.
@@ -33,8 +35,8 @@ class JsonCity(private val context: Context, private val fileName: String) {
      * @param jsonString The JSON string to be parsed.
      * @return A list of `City` objects parsed from the JSON string.
      **/
-    fun parseJsonToModel(jsonString: String): List<City> {
+    fun parseJsonToModel(jsonString: String): List<CityDto> {
         val gson = Gson()
-        return gson.fromJson(jsonString, object : TypeToken<List<City>>() {}.type)
+        return gson.fromJson(jsonString, object : TypeToken<List<CityDto>>() {}.type)
     }
 }

@@ -1,18 +1,16 @@
 package com.nadin.city_locator.presentation.theme
 
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 
 private val LightColorScheme = lightColorScheme(
     primary = Primary,
     secondary = Secondary,
+    onPrimary = OnPrimary,
 )
 
 @Composable
-fun CityLocatorTheme(
-    content: @Composable () -> Unit
-) {
+fun CityLocatorTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = LightColorScheme,
         typography = Typography,
