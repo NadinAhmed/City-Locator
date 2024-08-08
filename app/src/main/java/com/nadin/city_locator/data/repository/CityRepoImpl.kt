@@ -11,4 +11,8 @@ class CityRepoImpl @Inject constructor(private val jsonCity: JsonCity) : CityRep
         val parsedCity = jsonCity.parseJsonToModel(jsonString)
         return parsedCity.map { it.toDomainModel() }
     }
+
+    override fun sortCityList(cityItems: List<City>): List<City> {
+        return cityItems.sortedBy { it.name }
+    }
 }
