@@ -5,5 +5,5 @@ import com.nadin.city_locator.domain.repository.CityRepo
 import javax.inject.Inject
 
 class GetAllCitiesUseCase @Inject constructor(private val cityRepo: CityRepo) {
-    operator fun invoke(): List<City> = cityRepo.getAllCities()
+    suspend operator fun invoke(): List<City> = cityRepo.getAllCities()
 }
