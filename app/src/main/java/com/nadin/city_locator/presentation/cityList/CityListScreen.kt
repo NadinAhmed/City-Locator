@@ -20,9 +20,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -35,6 +37,12 @@ fun CityListScreen(
     viewModel: CityListViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+
+    LaunchedEffect(key1 = state.intent) {
+        state.intent?.let { context.startActivity(it) }
+        viewModel.resetIntent()
+    }
 
     Scaffold(
         topBar = {
@@ -60,7 +68,9 @@ fun CityListScreen(
     ) { innerPadding ->
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.padding(innerPadding).fillMaxSize(),
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize(),
         ) {
             if (state.isLoading) {
                 CircularProgressIndicator()
@@ -74,7 +84,7 @@ fun CityListScreen(
                     items(state.cities) {
                         CityListItem(
                             city = it,
-                            onClick = { /*TODO*/ },
+                            onClick = { viewModel.onEvent(CityListEvent.OnCityClicked(city = it)) },
                             modifier = Modifier.height(70.dp),
                         )
                     }
@@ -82,6 +92,5 @@ fun CityListScreen(
                 }
             }
         }
-
     }
 }

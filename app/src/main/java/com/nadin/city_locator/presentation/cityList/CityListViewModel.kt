@@ -1,5 +1,7 @@
 package com.nadin.city_locator.presentation.cityList
 
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nadin.city_locator.domain.usecase.GetAllCitiesUseCase
@@ -13,8 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CityListViewModel @Inject constructor(
     getAllCitiesUseCase: GetAllCitiesUseCase,
-) :
-    ViewModel() {
+) : ViewModel() {
     private val _state = MutableStateFlow(CityListState())
     val state = _state.asStateFlow()
 
@@ -32,6 +33,32 @@ class CityListViewModel @Inject constructor(
                     isLoading = false,
                 )
             }
+        }
+    }
+
+    fun onEvent(event: CityListEvent){
+        when(event){
+            is CityListEvent.OnCityClicked-> {
+                val intentUri =
+                    Uri.parse("geo:${event.city.coordinates.lat},${event.city.coordinates.lon}")
+                val mapIntent = Intent(Intent.ACTION_VIEW, intentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                _state.update {
+                    it.copy(
+                        intent = mapIntent,
+                    )
+                }
+            }
+
+
+        }
+    }
+
+    fun resetIntent() {
+        _state.update {
+            it.copy(
+                intent = null
+            )
         }
     }
 }
