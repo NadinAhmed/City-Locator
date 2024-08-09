@@ -1,6 +1,5 @@
 package com.nadin.city_locator.data.repository
 
-import android.util.Log
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toLowerCase
 import com.nadin.city_locator.data.datasource.JsonCity
