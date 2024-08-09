@@ -5,7 +5,9 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nadin.city_locator.domain.usecase.GetAllCitiesUseCase
+import com.nadin.city_locator.domain.usecase.SearchCitiesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -14,10 +16,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CityListViewModel @Inject constructor(
-    getAllCitiesUseCase: GetAllCitiesUseCase,
+    private val getAllCitiesUseCase: GetAllCitiesUseCase,
+    private val searchCitiesUseCase: SearchCitiesUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow(CityListState())
     val state = _state.asStateFlow()
+
+    private var searchJob: Job? = null
 
     init {
         viewModelScope.launch {
@@ -50,7 +55,43 @@ class CityListViewModel @Inject constructor(
                 }
             }
 
+            CityListEvent.OnSearchClicked -> {
+                _state.update {
+                    it.copy(
+                        isSearchVisible = true,
+                    )
+                }
+            }
+            CityListEvent.OnSearchHideClicked -> {
+                viewModelScope.launch {
+                    val cities = getAllCitiesUseCase()
+                    _state.update {
+                        it.copy(
+                            cities = cities,
+                            isSearchVisible = false,
+                            searchQuery = "",
+                        )
+                    }
+                }
+            }
+            is CityListEvent.OnSearchValueChanged -> {
+                searchJob?.cancel()
 
+                _state.update {
+                    it.copy(
+                        searchQuery = event.searchQuery
+                    )
+                }
+
+                searchJob = viewModelScope.launch {
+                    val results = searchCitiesUseCase(_state.value.searchQuery)
+                    _state.update {
+                        it.copy(
+                            cities = results
+                        )
+                    }
+                }
+            }
         }
     }
 

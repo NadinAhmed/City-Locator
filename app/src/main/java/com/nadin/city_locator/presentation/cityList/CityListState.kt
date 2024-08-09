@@ -7,4 +7,6 @@ data class CityListState(
     val cities: List<City> = emptyList(),
     val isLoading: Boolean = false,
     val intent: Intent? = null,
+    val isSearchVisible: Boolean = false,
+    val searchQuery: String = "",
 )
