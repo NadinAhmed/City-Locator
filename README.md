@@ -4,6 +4,14 @@
 
 City Locator is a simple Android application developed as part of the application process for the [Kilvvr](https://www.klivvr.com/) internship. The app demonstrates my ability to implement Clean Architecture principles, even in a small-scale project. The primary functionality of the app is to load and display a list of cities, allow the user to search for a specific city by name, and perform the search efficiently using the binary search algorithm.
 
+## Demo Video
+
+<p align="center">
+  <a href="https://youtu.be/DwdZXjCLCT8">
+    <img src="https://github.com/NadinAhmed/City-Locator/blob/master/City%20Locator.png">
+  </a>
+</p>
+
 ## Features
 
 - **Load City Data**: The app loads a list of city data from a local JSON file.
