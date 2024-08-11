@@ -8,7 +8,7 @@ City Locator is a simple Android application developed as part of the applicatio
 
 <p align="center">
   <a href="https://youtu.be/DwdZXjCLCT8">
-    <img src="https://github.com/NadinAhmed/City-Locator/blob/master/City%20Locator.png">
+    <img src="https://github.com/NadinAhmed/City-Locator/blob/master/city%20locator%20screen.png">
   </a>
 </p>
 
